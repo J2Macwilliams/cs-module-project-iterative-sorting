@@ -1,25 +1,42 @@
 # TO-DO: Complete the selection_sort() function below
 def selection_sort(arr):
     # loop through n-1 elements
-    for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
+    for i in range(len(arr)):
+        
+        smallest_index = i
         # TO-DO: find next smallest element
-        # (hint, can do in 3 loc)
-        # Your code here
+        # loop thru from next index 
+        for x in range(i+1, len(arr)):
+            # compare all the remaining elements
+            if arr[smallest_index] > arr[x]:
+                # increment cur-index which is tied to smallest index
+                smallest_index = x
 
-
-        # TO-DO: swap
-        # Your code here
+        # Swap the found min element with the first element
+        arr[i], arr[smallest_index] = arr[smallest_index], arr[i]
 
     return arr
 
 
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
-    # Your code here
+    # establish n as global variable
+    n = 0
+    # create an overall loop
+    while n < len(arr) - 1:
+        # create a for loop that checks thru
+        for i in range(len(arr) - 1):
+            # establish comparable value j
+            j = i + 1
+            # compare values
+            if arr[i] > arr[j]:
+                # swap values
+                arr[i], arr[j] = arr[j] , arr[i]
 
-
+        # increment n
+        n += 1
+    
+    # return sorted array
     return arr
 
 '''
@@ -40,7 +57,25 @@ buckets.
 What is the time and space complexity of the counting sort algorithm?
 '''
 def counting_sort(arr, maximum=None):
-    # Your code here
-
-
-    return arr
+    # Create dictionary
+    counts = {}
+    # loop thru array
+    for num in arr:
+        # add to dictionary if not num
+        if num < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        if num not in counts:
+            counts[num] = 0
+        # increment counter
+        counts[num] += 1
+    
+    # create new sorted array
+    sorted_array = []
+    # loop through sorted counts dictionary items
+    for n, count in sorted(counts.items()):
+        # loop thru quantity of each count
+        for i in range(count):
+            # append number to sorted array
+            sorted_array.append(n)
+    # return array
+    return sorted_array
